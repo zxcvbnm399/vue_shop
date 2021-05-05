@@ -39,10 +39,10 @@
 export default {
   data() {
     return {
-      //这是登录表单的数据绑定对象
+      // eslint-disable-line这是登录表单的数据绑定对象
       loginForm: {
         username: 'admin',
-        password: '123456',
+        password: '123456'
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -53,29 +53,29 @@ export default {
             min: 3,
             max: 10,
             message: '长度在 3 到 10 个字符',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         // 验证密码是否合法
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 15, message: '长度在 6 到 15个字符', trigger: 'blur' },
-        ],
-      },
+          { min: 6, max: 15, message: '长度在 6 到 15个字符', trigger: 'blur' }
+        ]
+      }
     }
   },
-  //点击重置按钮，重置登录表单
+  // eslint-disable-line点击重置按钮，重置登录表单
   methods: {
     resetLoginForm() {
       // console.log(this);this指向Login.vue当前组件实例对象VueComponent
       this.$refs.loginFormRef.resetFields()
     },
-    //先获取loginFormRef引用对象，再调用validate函数进行表单预校验
+    // eslint-disable-line先获取loginFormRef引用对象，再调用validate函数进行表单预校验
     login() {
       this.$refs.loginFormRef.validate(async (valid) => {
         // console.log(valid);
         if (!valid) ruturn
-        const { data: res } = await this.$http.post('login', this.loginForm) //响应被解构data出来然后给res赋值
+        const { data: res } = await this.$http.post('login', this.loginForm) // eslint-disable-line响应被解构data出来然后给res赋值
         // console.log(res);
         if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
@@ -86,8 +86,8 @@ export default {
         // 2.通过编程式导航跳转到后台主页，路由是 /home
         this.$router.push('/home')
       })
-    },
-  },
+    }
+  }
 }
 </script>
 
