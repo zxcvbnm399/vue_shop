@@ -27,7 +27,8 @@ import {
     Tag,
     Tree,
     Select,
-    Option
+    Option,
+    Cascader
 } from 'element-ui'
 //导入弹框提示组件
 import { Message } from 'element-ui'
@@ -58,6 +59,7 @@ Vue.use(Tag)
 Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Cascader)
 // Message需要进行全局挂载，$message是自定义属性，这样每个组件中都可以使用this点$message调用
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
