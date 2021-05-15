@@ -22,3 +22,8 @@ body,
 .el-pagination{
     margin-top: 15px;
 }
+/* 百度搜的，改高度 */
+/* Cate和Params组件里级联选择器有影响 */
+.el-cascader-menu {
+    height: 300px;
+  }
