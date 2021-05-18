@@ -6,6 +6,7 @@
             <el-breadcrumb-item>商品管理</el-breadcrumb-item>
             <el-breadcrumb-item>参数列表</el-breadcrumb-item>
         </el-breadcrumb>
+        <!-- 卡片视图区域 -->
         <el-card>
             <!-- 头部警告区 -->
             <el-alert
@@ -135,7 +136,7 @@
     :visible.sync="editDialogVisible"
     width="50%"
     @close="editDialogClosed">
-    <!-- 修改参数的对话框 -->
+    <!-- 修改参数表单数据 -->
     <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
         <el-form-item :label="titleText" prop="attr_name">
             <el-input v-model="editForm.attr_name"></el-input>

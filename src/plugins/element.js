@@ -31,7 +31,12 @@ import {
     Cascader,
     Alert,
     Tabs,
-    TabPane
+    TabPane,
+    Steps,
+    Step,
+    Checkbox,
+    CheckboxGroup,
+    Upload
 } from 'element-ui'
 //导入弹框提示组件
 import { Message } from 'element-ui'
@@ -66,6 +71,11 @@ Vue.use(Cascader)
 Vue.use(Alert)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox)
+Vue.use(Upload)
 // Message需要进行全局挂载，$message是自定义属性，这样每个组件中都可以使用this点$message调用
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

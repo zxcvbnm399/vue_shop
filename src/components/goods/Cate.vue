@@ -97,7 +97,7 @@ export default {
             // 查询条件
             querInfo: {
                 type: 3,
-                // 当前页数
+                // 当前页码
                 pagenum: 1,
                 // 一页显示条数
                 pagesize: 5
