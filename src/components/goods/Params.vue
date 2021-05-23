@@ -26,7 +26,7 @@
                     <el-cascader
                     v-model="selectedCateKeys"
                     :options="catelist"
-                    expand-trigger:="hover"
+                    expand-trigger="hover"
                     :props="cateProps"
                     @change="handleChange">
                     </el-cascader>

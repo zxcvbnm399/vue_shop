@@ -11,8 +11,8 @@
         <el-card>
             <el-row>
                 <el-col :span="8">
-                    <el-input placeholder="请输入内容">
-                        <el-button slot="append" icon="el-icon-search"></el-button>
+                    <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="getOrderList">
+                        <el-button slot="append" icon="el-icon-search" @click="getOrderList"></el-button>
                     </el-input>
                 </el-col>
             </el-row>
@@ -36,7 +36,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
-                    <template slot-scope="scope">
+                    <template>
                         <el-button type="primary" size="mini" icon="el-icon-edit" @click="showBox"></el-button>
                         <el-button type="success" size="mini" icon="el-icon-location" @click="showProgressBox"></el-button>
                     </template>
