@@ -2,6 +2,7 @@
 
 module.exports = {
     // 发布模式
+    // 链式编程形式
     chainWebpack: config => {
         config.when(process.env.NODE_ENV === 'production', config => {
             config.entry('app').clear().add('./src/main-prod.js')

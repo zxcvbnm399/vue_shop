@@ -80,7 +80,14 @@
             title="物流进度"
             :visible.sync="progressVisible"
             width="50%">
-                <span>这是一段信息</span>
+            <el-timeline>
+                <el-timeline-item
+                v-for="(activity, index) in progressInfo"
+                :key="index"
+                :timestamp="activity.time">
+                {{activity.context}}
+                </el-timeline-item>
+                </el-timeline>
             </el-dialog>
     </div>
 </template>
@@ -164,20 +171,21 @@ export default {
         // 展示定位对话框   
         // 因为发送请求有问题，先搁置这个功能
         // async 
-        showProgressBox() {
-            // console.log(11111)
-            // const { data: res } = await this.$http.get('/kuaidi/1106975712662')
-            // if(res.meta.status !==200) {
-            //     return this.$message.error('获取物流进度失败！')
-            // }
-            // console.log(22222)
-            // this.progressInfo = res.data
+        async showProgressBox() {
+            const { data: res } = await this.$http.get('kuaidi/1106975712662')
+            if(res.meta.status !==200) {
+                return this.$message.error('获取物流进度失败！')
+            }
+            window.sessionStorage.setItem('pass','')
+            this.progressInfo = res.data
             this.progressVisible = true
-            // console.log(this.progressInfo)
+            console.log(this.progressInfo)
         }
     }  
 }
 </script>
 
 <style lang="less" scoped>
+@import '../../plugins/timeline/timeline.css';
+@import '../../plugins/timeline-item/timeline-item.css';
 </style>

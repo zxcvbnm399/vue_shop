@@ -1,24 +1,3 @@
 # vue_shop
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+黑马电商后台管理的快递api崩了，在axios请求拦截器里筛选在快递查询页面的请求基准地址，并且修改了，原基准地址一切正常。

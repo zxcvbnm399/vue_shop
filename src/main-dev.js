@@ -22,25 +22,43 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import axios from 'axios'
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'//为axios配置请求根路径
+//配置请求根路径
+axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+// axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'//为axios配置请求根路径
 
 // axios请求拦截，相当于预处理这次请求
 axios.interceptors.request.use(config => {
-  // 在request拦截器中，展示进度条NProgress.start()
-  NProgress.start()
-  // console.log(config)
-  // 为请求头对象，添加Token验证的Authorization
-  config.headers.Authorization = window.sessionStorage.getItem('token')
-  //最后必须 return config
-  return config
+  // 在发送请求之前做些什么
+
+  if (window.sessionStorage.getItem('activePath') !== '/orders') {
+    // 在request拦截器中，展示进度条NProgress.start()
+    NProgress.start()
+    // console.log(config)
+    // // 在发送请求之前，为请求头对象，添加Token验证的Authorization
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+    //最后发送添加token后的请求 return config
+    return config
+  } else {
+    // 在request拦截器中，展示进度条NProgress.start()
+    NProgress.start()
+    config.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
+    // console.log(config)
+    // 为请求头对象，添加Token验证的Authorization
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+    //最后必须 return config
+    return config
+  }
 })
+
+
 // 在response拦截器中隐藏进度条NProgress.done(),use回调函数拿到配置对象config
 axios.interceptors.response.use(config => {
   NProgress.done()
   return config
 })
 
-Vue.prototype.$http = axios//使每个Vue组件可通过this都能直接访问$http，发起请求
+//把包挂载到Vue原型对象上，使每个Vue组件可通过this都能直接访问$http，发起请求
+Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 

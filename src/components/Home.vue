@@ -118,8 +118,10 @@ export default {
 .el-header {
   background-color: #373d41;
   display: flex;
-  justify-content: space-between; //左右贴边对齐
+  //flex布局的 左右贴边对齐属性
+  justify-content: space-between; 
   padding-left: 0;
+  // flex布局的 居中对齐盒内各元素：
   align-items: center;
   color: #fff;
   font-size: 20px;

@@ -1,6 +1,9 @@
 {
-    "semi":false,
-    "singleQuote":true
+    //json格式配置文件
+
+
+    "semi":false    //不加分号结尾
+    "singleQuote":true    //允许使用单引号
     //禁止随时添加逗号,这个很重要。找了好久
     "trailingComma": "none"
     "no-unused-vars":'off'

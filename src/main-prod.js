@@ -11,6 +11,9 @@ import TreeTable from 'vue-table-with-tree-grid'
 // 导入富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
 
+// 时间轴导入
+import Timeline from './plugins/timeline/index.js'
+import TimelineItem from './plugins/timeline-item/index.js'
 
 // 导入 NProgress 包对应的js和css
 // 实现效果
@@ -22,13 +25,24 @@ axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'//为axios配置
 
 // axios请求拦截，相当于预处理这次请求
 axios.interceptors.request.use(config => {
-    // 在request拦截器中，展示进度条NProgress.start()
-    NProgress.start()
-    // console.log(config)
-    // 为请求头对象，添加Token验证的Authorization
-    config.headers.Authorization = window.sessionStorage.getItem('token')
-    //最后必须 return config
-    return config
+    if (window.sessionStorage.getItem('activePath') !== '/orders') {
+        // 在request拦截器中，展示进度条NProgress.start()
+        NProgress.start()
+        // console.log(config)
+        // 为请求头对象，添加Token验证的Authorization
+        config.headers.Authorization = window.sessionStorage.getItem('token')
+        //最后必须 return config
+        return config
+    } else {
+        // 在request拦截器中，展示进度条NProgress.start()
+        NProgress.start()
+        config.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
+        // console.log(config)
+        // 为请求头对象，添加Token验证的Authorization
+        config.headers.Authorization = window.sessionStorage.getItem('token')
+        //最后必须 return config
+        return config
+    }
 })
 // 在response拦截器中隐藏进度条NProgress.done(),use回调函数拿到配置对象config
 axios.interceptors.response.use(config => {
@@ -43,6 +57,10 @@ Vue.config.productionTip = false
 Vue.component('tree-table', TreeTable)
 // 将富文本编辑器，注册为全局可用的组件
 Vue.use(VueQuillEditor)
+
+// 时间轴注册组件
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 // 时间过滤器
 Vue.filter('dateFormat', function (originVal) {
     const dt = new Date(originVal)

@@ -19,11 +19,7 @@
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input
-            type="password"
-            v-model="loginForm.password"
-            prefix-icon="iconfont icon-3702mima"
-          ></el-input>
+          <el-input type="password" v-model="loginForm.password" prefix-icon="iconfont icon-3702mima"></el-input>
         </el-form-item>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
@@ -49,12 +45,7 @@ export default {
         // 验证用户名是否合法
         username: [
           { required: true, message: '请输入登录名称', trigger: 'blur' },
-          {
-            min: 3,
-            max: 10,
-            message: '长度在 3 到 10 个字符',
-            trigger: 'blur'
-          }
+          {min: 3,max: 10,message: '长度在 3 到 10 个字符',trigger: 'blur'}
         ],
         // 验证密码是否合法
         password: [
@@ -74,7 +65,7 @@ export default {
     login() {
       this.$refs.loginFormRef.validate(async (valid) => {
         // console.log(valid);
-        if (!valid) ruturn
+        if (!valid) ruturn;
         const { data: res } = await this.$http.post('login', this.loginForm) // eslint-disable-line响应被解构data出来然后给res赋值
         // console.log(res);
         if (res.meta.status !== 200) return this.$message.error('登录失败')
@@ -135,7 +126,9 @@ export default {
 }
 
 .btns {
-  display: flex; //弹性盒模型
-  justify-content: flex-end; //横轴上：尾部对齐
+  //flex弹性盒模型
+  display: flex; 
+  //横轴上：尾部对齐
+  justify-content: flex-end; 
 }
 </style>

@@ -218,13 +218,13 @@ export default {
            trigger: 'blur' }
         ],
         email: [
-          { required: true,
-           message: '请输入邮箱',
-           trigger: 'blur' }, { validator: checkEmail, trigger: 'blur' }],
+          { required: true, message: '请输入邮箱',trigger: 'blur' }, 
+           { validator: checkEmail, trigger: 'blur' }
+           ],
         mobile: [
-           { required: true,
-           message: '请输入手机号',
-           trigger: 'blur' }, { validator: checkMobile, trigger: 'blur' }]
+           { required: true, message: '请输入手机号',trigger: 'blur' },
+            { validator: checkMobile, trigger: 'blur' }
+            ]
       },
       // 控制修改用户对话框的显示与隐藏
       editDialogVisible: false,

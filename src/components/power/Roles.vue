@@ -34,8 +34,8 @@
                                     <el-tag type="success" closable @close="removeRightById(scope.row, item2.id)">{{item2.authName}}</el-tag>
                                     <i class="el-icon-caret-right"></i>
                                 </el-col>
-                                <el-col :span="13">
-                                    <el-tag type="warning" v-for='(item3,i3) in item2.children' :key="item3.id" closable @close="removeRightById(scope.row, item3.id)">
+                                <el-col :span="18">
+                                    <el-tag type="warning" v-for='item3 in item2.children' :key="item3.id" closable @close="removeRightById(scope.row, item3.id)">
                                         {{item3.authName}}
                                         </el-tag>
                                     <i class="el-icon-caret-right"></i>
@@ -69,7 +69,7 @@
   :visible.sync="setRightDialogVisible"
   width="50%"
   @close="setRightDialogClosed">
-  <!-- 树形控件 -->
+  <!-- 树形控件 :props="treeProps"是树形控件的属性绑定对象-->
   <el-tree
   :data="rightslist"
   :props="treeProps"
@@ -144,9 +144,9 @@ export default {
             rightslist: [],
             // 树形控件的属性绑定对象
             treeProps: {
-                // 显示的名称
+                // 每个节点显示的名称
                 label: 'authName',
-                // 父子嵌套
+                // 父子嵌套的节点
                 children: 'children'
             },
             // 默认选中的Id值数组
@@ -235,6 +235,9 @@ export default {
         // this.getRolesList()
         // 把服务器返回最新的权限直接赋给当前children属性，防止页面刷新
         role.children = res.data
+        console.log(role)
+        console.log(res.data)
+
         },
 
 
@@ -252,7 +255,7 @@ export default {
         this.rightslist= res.data
         console.log(res.data)
 
-        // 递归获取三级节点的Id
+        // 调用递归函数获取三级节点的Id
         this.getLeafKeys(role,this.defKeys)
 
 

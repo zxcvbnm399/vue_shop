@@ -245,6 +245,8 @@ export default {
         // 将本来返回是字符串的attr_vals转成数组,三元表达式过滤空字符串
         res.data.forEach(item => {
             item.attr_vals = item.attr_vals ? item.attr_vals.split(' ') : []
+            // 过滤空字符串元素
+            item.attr_vals=item.attr_vals.filter(i=>i && i.trim())
             // 控制文本框的显示与隐藏
             item.inputVisible = false
             // 文本框中输入的值
