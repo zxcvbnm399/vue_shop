@@ -39,9 +39,9 @@
         <el-tag size="mini" type="success" v-else-if="scope.row.cat_level===1">二级</el-tag>
         <el-tag size="mini" type="warning" v-else>三级</el-tag>
     </template>
-    <template slot="opt">
-        <el-button size="mini" type="primary" icon="el-icon-edit">编辑</el-button>
-        <el-button size="mini" type="danger" icon="el-icon-delete">删除</el-button>
+    <template slot="opt" slot-scope="scope">
+        <el-button size="mini" type="primary" icon="el-icon-edit" @click="editDialog(scope.row)">编辑</el-button>
+        <el-button size="mini" type="danger" icon="el-icon-delete"  @click="removeById(scope.row.cat_id)">删除</el-button>
     </template>
     </tree-table>
     <!-- 分页区域 -->
@@ -85,6 +85,23 @@
   <span slot="footer" class="dialog-footer">
     <el-button @click="addCateDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="addCate">确 定</el-button>
+  </span>
+</el-dialog>
+
+<!-- 编辑按钮对话框 -->
+<el-dialog
+  title="编辑分类参数"
+  :visible.sync="editDialogVisiable"
+  width="50%"
+  @close="editDialogClose">
+  <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="100px">
+  <el-form-item label="分类名称" prop="name">
+    <el-input v-model="editForm.name"></el-input>
+  </el-form-item>
+  </el-form>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="editDialogVisiable = false">取 消</el-button>
+    <el-button type="primary" @click="editForms">确 定</el-button>
   </span>
 </el-dialog>
     </div>
@@ -165,7 +182,22 @@ export default {
                 // 父子嵌套的那个属性
                 children: 'children'
             },
-            selectedKeys: []
+            selectedKeys: [],
+            // 编辑按钮显示与隐藏
+            editDialogVisiable:false,
+            // 编辑参数表单数据
+            editForm:{
+                name:'',
+                cat_id:''
+            },
+            // 编辑表单校验规则
+            editFormRules:{
+                name:[
+                     {
+                        required: true, message:'请编辑分类名称',trigger:'blur'
+                    }
+                ]
+            }
         }
     },    
     created() {
@@ -255,7 +287,49 @@ export default {
         // 为当前分类的等级赋值
         this.addCateForm.cat_level = 0
         this.selectedKeys = []
-      }
+      },
+    //   触发编辑按钮事件
+    editDialog(row){
+        console.log(row)
+        this.editForm.name=row.cat_name
+        this.editForm.cat_id=row.cat_id
+        this.editDialogVisiable = true
+    },
+    // 编辑对话框关闭事件
+    editDialogClose(){
+        this.$refs.editFormRef.resetFields()
+        this.editDialogVisiable = false
+    },
+    // 编辑完成提交
+    async editForms(){
+        const {data : res} = await this.$http.put('categories/' + this.editForm.cat_id,{cat_name:this.editForm.name})
+        if(res.meta.status !== 200) {
+            this.$message.error('更新失败！')
+            return
+        }
+        this.$message.success('修改成功！')
+        this.getCateList()
+        this.editDialogVisiable = false
+    },
+    // 删除事件
+    async removeById(id){
+        const confirmResult = await this.$confirm('此操作将永久删除该分类, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).catch(err => err)
+        if(confirmResult !== 'confirm'){
+            this.$message.info('已取消删除')
+        }else{
+        const {data:res} =await this.$http.delete('categories/' + id)
+        if(res.meta.status !== 200){
+            this.$message.error('删除失败！')
+            return
+        }
+        this.$message.success('删除成功！')
+        this.getCateList()
+        }
+    }
     }
 }
 </script>

@@ -253,7 +253,7 @@ export default {
         
         // 把获取到的权限数据保存到data中
         this.rightslist= res.data
-        console.log(res.data)
+        console.log(role)
 
         // 调用递归函数获取三级节点的Id
         this.getLeafKeys(role,this.defKeys)

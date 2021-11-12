@@ -69,7 +69,7 @@ const router = new VueRouter({
   ]
 })
 
-// eslint-disable-line拿到路由对象挂载befeach这个路由导航守卫控制访问权限
+// eslint-disable-line拿到路由对象挂载befeach这个 路由导航守卫 控制访问权限
 router.beforeEach((to, from, next) => {
   // eslint-disable-line to 将要访问的路径
   // eslint-disable-line from 代表从哪个路径跳转而来

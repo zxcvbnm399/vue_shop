@@ -66,6 +66,7 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         // console.log(valid);
         if (!valid) ruturn;
+        // 解构赋值出一个data属性并命名为res
         const { data: res } = await this.$http.post('login', this.loginForm) // eslint-disable-line响应被解构data出来然后给res赋值
         // console.log(res);
         if (res.meta.status !== 200) return this.$message.error('登录失败')
