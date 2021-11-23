@@ -256,6 +256,7 @@ export default {
           console.log(res)
           if (res.meta.status !==201) {
             this.$message.error('修改商品信息失败！')
+            return
           }
 
           this.$message.success('修改商品信息成功！')

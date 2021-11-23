@@ -3,7 +3,7 @@
   <el-container class="home-container">
     <el-header>
       <div>
-        <img src="../assets/heima.png" alt />
+        <img class="pic" src="../assets/basketball.png" alt />
         <span>电商后台管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
@@ -158,5 +158,10 @@ export default {
   text-align: center;
   letter-spacing: 0.2em;
   cursor: pointer; //鼠标放上去变成小手
+}
+.pic{
+  margin-left: 10px;
+  width: 40px;
+  border-radius: 5px;
 }
 </style>
